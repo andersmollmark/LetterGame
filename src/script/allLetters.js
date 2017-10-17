@@ -6,12 +6,27 @@ ALL_LETTERS = (function () {
     var alphabet = 'abcdefghijklmnopqrstuvxyzåäö';
 
     var allPictures = [];
+    var service = {
+        getAllPictures: getAllPictures,
+        getLetter: getLetter
+    };
 
     initLetters();
 
-    var service = {
-        getAllPictures: getAllPictures
-    };
+
+    function getLetter(letter){
+        var result = letter;
+        if(letter === 'å'){
+            result = 'aa';
+        }
+        else if(letter === 'ä'){
+            result = 'ae';
+        }
+        else if(letter === 'ö'){
+            result = 'oe';
+        }
+        return result;
+    }
 
     function getAllPictures() {
         return allPictures;
@@ -20,18 +35,10 @@ ALL_LETTERS = (function () {
     function initLetters() {
         for (i = 0; i < alphabet.length; i++) {
             var letter = alphabet[i].charAt(0);
-            if(letter === 'å'){
-                letter = 'aa';
-            }
-            else if(letter === 'ä'){
-                letter = 'ae';
-            }
-            else if(letter === 'ö'){
-                letter = 'oe';
-            }
+            var theLetter = service.getLetter(letter);
             allPictures.push({
-                name: letter,
-                path: 'img/letters/' + letter + '.png'
+                name: theLetter,
+                path: 'img/letters/' + theLetter + '.png'
             });
         }
     }

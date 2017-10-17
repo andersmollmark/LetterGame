@@ -88,9 +88,11 @@ function checkLetter(event) {
     var keycodeFromLetter = letter.charCodeAt(0);
     console.log('keycode:' + keycode + ' letter:' + letter + ' keyCodeFromLetter:' + keycodeFromLetter + ' letterFromMap:' + letterFromMap);
 
-    if(activeLetters[letter] && activeLetters[letter].length > 0){
+    var resultLetter = ALL_LETTERS.getLetter(letter);
+
+    if(activeLetters[resultLetter] && activeLetters[resultLetter].length > 0){
         console.log('killed...');
-        var activeLetterArray = activeLetters[letter];
+        var activeLetterArray = activeLetters[resultLetter];
         var theLetter = activeLetterArray.pop();
         theLetter.letterObject.kill();
         console.log('number of letters:' + activeLetterArray.length);
@@ -144,9 +146,7 @@ function createLetter(group){
     var index = randomIntFromInterval(0, alphabet.length-1);
     // var index = 0;
     var xpos = randomIntFromInterval(5, 595);
-    var theLetter = alphabetArray[index];
-
-    // console.log('letter:' + theLetter);
+    // index = 26;
 
     var templetter = group.create(xpos, 5, theLetters[index].name);
     templetter.body.velocity.y = letterSpeed;
